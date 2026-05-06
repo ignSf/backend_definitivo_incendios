@@ -1,9 +1,0 @@
-torch
-torchvision
-timm
-onnxruntime
-joblib
-scikit-learn
-xgboost
-numpy
-Pillow
