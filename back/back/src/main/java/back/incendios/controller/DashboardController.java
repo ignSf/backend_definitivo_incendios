@@ -1,9 +1,6 @@
 package back.incendios.controller;
 
 import back.incendios.repository.ReporteRepository;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,14 +14,11 @@ import java.util.*;
 @RequestMapping("/api/dashboard")
 @RequiredArgsConstructor
 @PreAuthorize("hasRole('ADMIN')")
-@Tag(name = "Dashboard", description = "Estadísticas y métricas para el panel de administración (solo ADMIN)")
 public class DashboardController {
 
     private final ReporteRepository reporteRepository;
 
     @GetMapping("/stats")
-    @Operation(summary = "Estadísticas diarias", description = "Retorna estadísticas diarias de los últimos 30 días: total de reportes, gravedad promedio, pendientes, en atención, extinguidos y críticos.")
-    @ApiResponse(responseCode = "200", description = "Lista de estadísticas por día")
     public ResponseEntity<List<Map<String, Object>>> getStats() {
         List<Object[]> rows = reporteRepository.findEstadisticasDiarias();
         List<Map<String, Object>> result = new ArrayList<>();
